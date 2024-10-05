@@ -16,8 +16,10 @@ const Login = () => {
         password,
       });
       console.log("로그인 응답:", response.data);
+      localStorage.setItem("nickname", response.data.nickname);
       localStorage.setItem("isLoggedIn", "true");
       navigate("/");
+      window.location.reload();
     } catch (error) {
       console.error("로그인 실패", error);
     }

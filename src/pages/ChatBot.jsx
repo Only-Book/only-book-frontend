@@ -133,7 +133,7 @@ const ChattingList = styled.div`
   flex-direction: column;
 `;
 
-const MyChatting = styled.p`
+const MyChatting = styled.div`
   ${({ theme }) => theme.fonts.helperText};
   background-color: ${({ theme }) => theme.colors.beige};
   color: ${({ theme }) => theme.colors.brown};
@@ -150,7 +150,7 @@ const BotContainer = styled.div`
   justify-content: start;
 `;
 
-const BotChatting = styled.p`
+const BotChatting = styled.div`
   ${({ theme }) => theme.fonts.helperText};
   background-color: ${({ theme }) => theme.colors.brown};
   color: ${({ theme }) => theme.colors.beige};
@@ -165,16 +165,16 @@ const BotChatting = styled.p`
   flex-direction: column;
 `;
 
-const Title = styled.p`
+const Title = styled.div`
   ${({ theme }) => theme.fonts.heading};
   margin-bottom: 10px;
 `;
 
-const Text = styled.p`
+const Text = styled.div`
   ${({ theme }) => theme.fonts.helperText};
 `;
 
-const MyChatInput = styled.p`
+const MyChatInput = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
