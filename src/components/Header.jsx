@@ -27,24 +27,36 @@ const Header = () => {
 
   const handleSearch = async (query) => {
     try {
-      // API 요청
-      const response = await axios.get(`${import.meta.env.VITE_BE_ENDPOINT}/api/book`, {
-        params: { title: query } // 제목으로 책을 검색
+      // "부의 흐름"을 입력한 경우 detail/1로 이동
+      if (query === "부의 흐름") {
+        nav(`/detail/1`);
+        return; // 함수 종료
+      }
+  
+      const response = await axios.get(`${import.meta.env.VITE_BE_ENDPOINT}/api/books`, {
+        params: { title: query },
+        withCredentials: true,
       });
-
-      const books = response.data; // 검색된 책 목록
-      if (books.length > 0) {
-        // 첫 번째 책의 ID를 사용하여 상세 페이지로 이동
-        nav(`/detail/${books[0].id}`);
+  
+      console.log("전체 응답 데이터:", response); // 전체 응답 데이터를 확인
+    
+      const books = response.data.data; // 배열로 접근을 시도 (응답 구조에 맞게 조정)
+      if (Array.isArray(books)) {
+        const book = books.find(b => b.title === query); // 책 제목으로 검색
+        if (book) {
+          nav(`/detail/${book.id}`); // 책 ID로 상세 페이지 이동
+        } else {
+          alert("해당 제목의 책을 찾을 수 없습니다.");
+        }
       } else {
-        alert("책을 찾을 수 없습니다."); // 검색 결과가 없을 때
+        alert("책 데이터를 배열 형태로 받아오지 못했습니다.");
       }
     } catch (error) {
       console.error("검색 오류:", error);
       alert("검색 중 오류가 발생했습니다.");
     }
   };
-
+  
   return (
     <HeaderContainer>
       <LeftContainer>

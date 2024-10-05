@@ -16,8 +16,10 @@ const Detail = () => {
     if (id) {
       const fetchBookDetails = async () => {
         try {
-          const response = await axios.get(`https://onlybook.shop:8443/api/book/${id}`);
-          setBook(response.data);
+          const response = await axios.get(`https://onlybook.shop:8443/api/books/${id}`, {
+            withCredentials: true, // 이 부분 추가
+            });
+          setBook(response.data.data); // 'data' 객체에서 정보 가져오기
         } catch (error) {
           setError("책 정보를 가져오는 데 실패했습니다.");
         } finally {
@@ -34,19 +36,26 @@ const Detail = () => {
 
   return (
     <DetailContainer>
-        {book ? (
+      {loading ? (
+        <p>로딩 중...</p>
+      ) : error ? (
+        <p>{error}</p>
+      ) : book ? (
         <BookContainer>
           <BookImageContainer>
-            <img src={book.coverImage} alt="책 표지" />
+            <img src={book.imgUrl} alt="책 표지" />
           </BookImageContainer>
           <BookDetailContainer>
             <BookInfoContainer>
               <BookName>{book.title}</BookName>
               <AuthorName>{book.author}</AuthorName>
               <DetailStory>{book.description}</DetailStory>
+              <Price>가격: {book.price}원</Price>
+              <Category>카테고리: {book.category}</Category>
+              <PublishDate>출판일: {book.publish_date}</PublishDate>
             </BookInfoContainer>
             <BookRecommend>
-              <RecommendNum>{book.recommendations}</RecommendNum>
+              <RecommendNum>10</RecommendNum>
               <RecommendTitle>추천 수</RecommendTitle>
             </BookRecommend>
           </BookDetailContainer>
@@ -112,6 +121,24 @@ const DetailStory = styled.p`
   width: 550px;
   opacity: 45%;
   line-height: 140%;
+  margin: 1vw 0;
+`;
+
+const Price = styled.p`
+  ${({ theme }) => theme.fonts.helperText};
+  color: ${({ theme }) => theme.colors.black};
+  margin: 1vw 0;
+`;
+
+const Category = styled.p`
+  ${({ theme }) => theme.fonts.helperText};
+  color: ${({ theme }) => theme.colors.black};
+  margin: 1vw 0;
+`;
+
+const PublishDate = styled.p`
+  ${({ theme }) => theme.fonts.helperText};
+  color: ${({ theme }) => theme.colors.black};
   margin: 1vw 0;
 `;
 
