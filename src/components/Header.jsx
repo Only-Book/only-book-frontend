@@ -20,6 +20,10 @@ const Header = () => {
     nav('/mybook');
   };
 
+  const handleChatBotClick = () => {
+    nav('/chatbot');
+  };
+
   return (
     <HeaderContainer>
       <LeftContainer>
@@ -45,7 +49,7 @@ const Header = () => {
       </LeftContainer>
       <RightContainer>
         <StyledButton onClick={handleHomeClick}>Home</StyledButton>
-        <StyledButton>갈릭 봇</StyledButton>
+        <StyledButton onClick={handleChatBotClick}>갈릭 봇</StyledButton>
         <StyledButton onClick={handleMyBookClick}>나만의 책장</StyledButton>
         <LoginButton onClick={handleLoginClick}>로그인</LoginButton>
       </RightContainer>
@@ -139,6 +143,10 @@ const LoginButton = styled.button`
   margin: 10px 20px;
   font-size: 18px;
   font-weight: bold;
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.beige};
+  }
 `;
 
 export default Header;

@@ -112,7 +112,7 @@ const JoinButton = styled.p`
   cursor: pointer;
 
   &:hover {
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.brown};
   }
 `;
 
