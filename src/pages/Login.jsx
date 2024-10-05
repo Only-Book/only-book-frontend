@@ -6,6 +6,9 @@ const Login = () => {
 
 const LoginContainer = styled.div`
   display: flex;
+  width: 100vw;
+  height: 100vh;
+  background-color: ${({ theme }) => theme.colors.brown};
 `;
 
 export default Login;
