@@ -67,6 +67,8 @@ const SearchInput = styled.input`
     text-align: center; /* 플레이스홀더 텍스트 중앙 정렬 */
   }
   margin: 10px;
+  font-size: 15px;
+  font-weight: bold;
 `;
 
 const IconButton = styled.button`
@@ -88,6 +90,8 @@ const StyledButton = styled.button`
   padding: 10px;
   cursor: pointer;
   margin: 0px;
+  font-size: 18px;
+  font-weight: bold;
 `;
 
 const LoginButton = styled.button`
@@ -101,6 +105,8 @@ const LoginButton = styled.button`
   padding: 10px 20px;
   cursor: pointer;
   margin: 10px;
+  font-size: 18px;
+  font-weight: bold;
 `;
 
 export default Header;

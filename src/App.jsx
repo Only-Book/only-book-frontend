@@ -13,7 +13,6 @@ function App() {
   return (
     <BrowserRouter>
       <Layout />
-      <ShortBook />
       <Routes>
         <Route path="/" element={<OnlyBook />} />
         <Route path="/login" element={<Login />} />
