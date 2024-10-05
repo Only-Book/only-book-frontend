@@ -23,7 +23,7 @@ export const Theme = {
     helperText: css`
       font-family: "Noto Sans KR", sans-serif;
       font-weight: 500;
-      font-size: 16px;
+      font-size: 18px;
     `,
     button: css`
       font-family: "Noto Sans KR", sans-serif;

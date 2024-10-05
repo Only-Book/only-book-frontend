@@ -1,33 +1,46 @@
 import styled from "styled-components";
+import Review from "../components/Review";
 
 const Detail = () => {
   return (
     <DetailContainer>
-      <BookImageContainer>
-        <img alt="임시 책 표지" />
-      </BookImageContainer>
-      <BookDetailContainer>
-        <BookInfoContainer>
-          <BookName>정의란 무엇인가</BookName>
-          <AuthorName>마이클 샌델</AuthorName>
-          <DetailStory>
-            동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세
-            <br />
-            무궁화 삼천리 화려강산 대한사람 대한으로 길이 보전하세
-            <br />
-            남산 위에 저 소나무 철갑을 두른 듯 바람서리 불변함은 우리 기상일세
-          </DetailStory>
-        </BookInfoContainer>
-        <BookRecommend>
-          <RecommendNum>30</RecommendNum>
-          <RecommendTitle>추천 수</RecommendTitle>
-        </BookRecommend>
-      </BookDetailContainer>
+      <BookContainer>
+        <BookImageContainer>
+          <img alt="임시 책 표지" />
+        </BookImageContainer>
+        <BookDetailContainer>
+          <BookInfoContainer>
+            <BookName>정의란 무엇인가</BookName>
+            <AuthorName>마이클 샌델</AuthorName>
+            <DetailStory>
+              동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세
+              <br />
+              무궁화 삼천리 화려강산 대한사람 대한으로 길이 보전하세
+              <br />
+              남산 위에 저 소나무 철갑을 두른 듯 바람서리 불변함은 우리 기상일세
+            </DetailStory>
+          </BookInfoContainer>
+          <BookRecommend>
+            <RecommendNum>30</RecommendNum>
+            <RecommendTitle>추천 수</RecommendTitle>
+          </BookRecommend>
+        </BookDetailContainer>
+      </BookContainer>
+      <ReviewContainer>
+        <Review />
+        <Review />
+        <Review />
+      </ReviewContainer>
     </DetailContainer>
   );
 };
 
 const DetailContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const BookContainer = styled.div`
   display: flex;
 `;
 
@@ -95,6 +108,15 @@ const RecommendTitle = styled.p`
   ${({ theme }) => theme.fonts.subTitle};
   color: ${({ theme }) => theme.colors.brown};
   margin: 0 3vw;
+`;
+
+const ReviewContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 55vh;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 export default Detail;
