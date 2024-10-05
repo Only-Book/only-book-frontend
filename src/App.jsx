@@ -1,4 +1,5 @@
 import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import Join from "./pages/Join";
 import Login from "./pages/Login";
@@ -8,18 +9,16 @@ import Search from "./pages/Search";
 
 function App() {
   return (
-    <>
+    <BrowserRouter>
       <Layout />
-
       <Routes>
-        <Route path='/' element={<OnlyBook />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/join' element={<Join />} />
-        <Route path='/search' element={<Search />} />
-        <Route path='/mybook' element={<MyBook />} />
+        <Route path="/" element={<OnlyBook />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/join" element={<Join />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/mybook" element={<MyBook />} />
       </Routes>
-
-    </>
+    </BrowserRouter>
   );
 }
 
