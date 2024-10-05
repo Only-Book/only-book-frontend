@@ -39,7 +39,13 @@ const Login = () => {
             onValidChange={setIsPwValid}
           />
           <ButtonContainer>
-            <Button isFormValid={isFormValid}>로그인</Button>
+            {isFormValid ? (
+              <Link to="/">
+                <Button $isFormValid={isFormValid}>로그인</Button>
+              </Link>
+            ) : (
+              <Button disabled={!isFormValid}>로그인</Button>
+            )}
             <Link to="/join">
               <JoinButton>회원가입</JoinButton>
             </Link>
@@ -95,8 +101,8 @@ const Button = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 3vh;
-  background-color: ${({ theme, isFormValid }) =>
-    isFormValid ? theme.colors.brown : theme.colors.gray};
+  background-color: ${({ theme, $isFormValid }) =>
+    $isFormValid ? theme.colors.brown : theme.colors.gray};
 `;
 
 const JoinButton = styled.p`
