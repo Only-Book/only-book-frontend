@@ -52,6 +52,8 @@ export const Theme = {
     white: "#FFFFFF",
     black: "#000000",
     gray: "#CDCDCD",
-    blue: "#DECDB6",
+    beige: "#DECDB6",
+    red: "#D72F2F",
+    green: "#2BCD3B",
   },
 };
