@@ -46,7 +46,7 @@ const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-around;
   background: ${({theme})=>theme.colors.brown};
-  height: 50px;
+  height: 75px;
 `;
 
 const SearchContainer = styled.div`
