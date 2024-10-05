@@ -4,12 +4,11 @@ const Review = () => {
   return (
     <ReviewContainer>
       <TextContainer>
-        <Title>유저 이름</Title>
-        <UserName>누구</UserName>
+        <Title>김지예</Title>
       </TextContainer>
       <DivisionLine />
       <Title>감상평</Title>
-      <ReviewText>어쩌구저쩌구</ReviewText>
+      <ReviewText>이 책을 읽고 정말 많은 도움이 되었어요. 돈을 관리하는 방법을 배울 수 있었습니다!</ReviewText>
     </ReviewContainer>
   );
 };

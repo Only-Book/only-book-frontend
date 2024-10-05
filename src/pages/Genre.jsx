@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import thriller from "../image/thiller.svg";
 import romance from "../image/romance.svg";
 import science from "../image/science.svg";
 import fairytail from "../image/fairytail.svg";
 import business from "../image/bussiness.svg";
 import assay from "../image/assay.svg";
+import { Axios } from "../api/Axios";
 
 const Genre = () => {
   const [selectGenre, setSelectGenre] = useState([]);
@@ -16,6 +16,40 @@ const Genre = () => {
       setSelectGenre(selectGenre.filter((g) => g !== genre));
     } else {
       setSelectGenre([...selectGenre, genre]);
+    }
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const categoryIdList = selectGenre
+        .map((genre) => {
+          switch (genre) {
+            case "스릴러":
+              return 1; // 스릴러의 ID
+            case "로맨스":
+              return 2; // 로맨스의 ID
+            case "과학":
+              return 3; // 과학의 ID
+            case "동화책":
+              return 4; // 동화책의 ID
+            case "비즈니스":
+              return 5; // 비즈니스의 ID
+            case "개발서":
+              return 6; // 개발서의 ID
+            default:
+              return null;
+          }
+        })
+        .filter((id) => id !== null); // 유효한 ID만 필터링
+
+      await Axios.post(`/auth/signin`, {
+        categoryIdList, // 선택한 장르 ID 목록
+      });
+
+      console.log("장르 선택 완료");
+    } catch (error) {
+      console.error("장르 선택 실패:", error);
+      alert("장르 선택 중 오류가 발생했습니다."); // 오류 처리
     }
   };
 
@@ -85,9 +119,7 @@ const Genre = () => {
         </GenreList>
       </GenreListContainer>
       {isFormValid ? (
-        <Link to="/login">
-          <Button $isFormValid={isFormValid}>완료</Button>
-        </Link>
+        <Button onClick={handleSubmit}>완료</Button> // 장르 선택 완료 버튼
       ) : (
         <Button disabled={!isFormValid}>완료</Button>
       )}

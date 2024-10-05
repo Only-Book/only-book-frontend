@@ -63,6 +63,17 @@ const Header = () => {
       alert("검색 중 오류가 발생했습니다.");
     }
   };
+
+  const handleLogout = async () => {
+    try {
+      await Axios.post("/auth/logout"); // 로그아웃 요청
+      localStorage.removeItem("isLoggedIn"); // 로그아웃 후 로그인 상태 제거
+      setIsLoggedIn(false); // 상태 업데이트
+      nav("/"); // 홈으로 이동
+    } catch (error) {
+      console.error("로그아웃 실패:", error);
+    }
+  };
   
   return (
     <HeaderContainer>

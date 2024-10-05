@@ -1,17 +1,20 @@
 import styled from "styled-components";
 import ShortBook from "../components/ShortBook";
+import { Link } from "react-router-dom";
 
 const OnlyBook = () => {
   return (
-  <OnlyBookContainer>
-    <TextContainer>
-      <SmallText>피곤한 당신에게 필요한 책은?</SmallText>
-      <MainText>힐링이 필요할 때 읽을 책을 추천해줘!</MainText>
-      <SubText>심심한 주말, 책과 함께 하고 싶다면?</SubText>
-      <AskButton>갈릭봇에게 질문하기</AskButton>
-    </TextContainer>
-    <ShortBook />
-  </OnlyBookContainer>
+    <OnlyBookContainer>
+      <TextContainer>
+        <SmallText>피곤한 당신에게 필요한 책은?</SmallText>
+        <MainText>힐링이 필요할 때 읽을 책을 추천해줘!</MainText>
+        <SubText>심심한 주말, 책과 함께 하고 싶다면?</SubText>
+        <Link to="/chatbot">
+          <AskButton>갈릭봇에게 질문하기</AskButton>
+        </Link>
+      </TextContainer>
+      <ShortBook />
+    </OnlyBookContainer>
   );
 };
 
@@ -32,7 +35,7 @@ const TextContainer = styled.div`
 
 const SmallText = styled.p`
   font-size: 30px;
-  color: #8B6A5E;
+  color: #8b6a5e;
   margin-bottom: 55px;
   margin-left: 150px;
 `;
@@ -49,7 +52,7 @@ const MainText = styled.p`
 
 const SubText = styled.p`
   font-size: 25px;
-  color: #B9A89A;
+  color: #b9a89a;
   margin-bottom: 20px;
   margin-right: 40px;
   display: flex;

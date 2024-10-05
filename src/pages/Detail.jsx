@@ -65,8 +65,6 @@ const Detail = () => {
       )}
       <ReviewContainer>
         <Review />
-        <Review />
-        <Review />
       </ReviewContainer>
     </DetailContainer>
   );

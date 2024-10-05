@@ -1,40 +1,24 @@
 import styled from "styled-components";
 import searchIcon from "../image/search.svg";
+import kim from "../image/kim_book.svg";
+import life from "../image/life_book.svg";
+import pig from "../image/pig_book.svg";
+import tea from "../image/tea_book.svg";
 
 const LongBook = () => {
   return (
   <LongBookContainer>
     <TitleContainer>
-      멋사님의 책장
+      은택님의 책장
     </TitleContainer>
     <BookItem>
       <ImgContainer>
-        <img src={searchIcon} alt="검색" />
+       <img src={pig} alt="돼지책 표지" />
       </ImgContainer>
       <ContentBox>
-        <TextContainer>책 이름</TextContainer>
+        <TextContainer>돼지 책</TextContainer>
         <Separator />
-        <TextContainer>감상평</TextContainer>
-      </ContentBox>
-    </BookItem>
-    <BookItem>
-      <ImgContainer>
-        <img src={searchIcon} alt="검색" />
-      </ImgContainer>
-      <ContentBox>
-        <TextContainer>책 이름</TextContainer>
-        <Separator />
-        <TextContainer>감상평</TextContainer>
-      </ContentBox>
-    </BookItem>
-    <BookItem>
-      <ImgContainer>
-        <img src={searchIcon} alt="검색" />
-      </ImgContainer>
-      <ContentBox>
-        <TextContainer>책 이름</TextContainer>
-        <Separator />
-        <TextContainer>감상평</TextContainer>
+        <TextContainer>어릴 때 제일 좋아하던 책! 추억이 새록새록해요</TextContainer>
       </ContentBox>
     </BookItem>
   </LongBookContainer>
@@ -91,6 +75,12 @@ const ImgContainer = styled.div`
   width: 200px;
   background: ${({theme})=>theme.colors.brown};
   border-radius: 10px;
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+  }
   `
 
 export default LongBook;
