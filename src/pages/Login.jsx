@@ -1,24 +1,27 @@
 import styled from "styled-components";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import InputBox from "../components/InputBox";
+import { Axios } from "../api/Axios";
 
 const Login = () => {
-  const [isIdValid, setIsIdValid] = useState(false);
-  const [isPwValid, setIsPwValid] = useState(false);
+  const [id, setId] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  const validateId = (input) => {
-    const idRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z0-9]{5,10}$/;
-    return idRegex.test(input);
+  const handleLogin = async () => {
+    try {
+      const response = await Axios.post(`/auth/login`, {
+        id,
+        password,
+      });
+      console.log("로그인 응답:", response.data);
+      localStorage.setItem("isLoggedIn", "true");
+      navigate("/");
+    } catch (error) {
+      console.error("로그인 실패", error);
+    }
   };
-
-  const validPassword = (input) => {
-    const passwordRegex =
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,14}$/;
-    return passwordRegex.test(input);
-  };
-
-  const isFormValid = isIdValid && isPwValid;
 
   return (
     <LoginContainer>
@@ -27,25 +30,18 @@ const Login = () => {
         <LoginBox>
           <InputBox
             inputText="아이디"
-            explainText="영문과 숫자를 조합하여 5~10글자 미만으로 입력하여 주세요."
-            validate={validateId}
-            onValidChange={setIsIdValid}
+            value={id}
+            onChange={(e) => setId(e.target.value)}
           />
           <InputBox
             inputText="비밀번호"
-            explainText="영문과 숫자, 특수기호를 조합하여 8~14글자 미만으로 입력하여 주세요."
-            validate={validPassword}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             isPassword={true}
-            onValidChange={setIsPwValid}
           />
           <ButtonContainer>
-            {isFormValid ? (
-              <Link to="/">
-                <Button $isFormValid={isFormValid}>로그인</Button>
-              </Link>
-            ) : (
-              <Button disabled={!isFormValid}>로그인</Button>
-            )}
+            <Button onClick={handleLogin}>로그인</Button>
+
             <Link to="/join">
               <JoinButton>회원가입</JoinButton>
             </Link>
@@ -101,8 +97,7 @@ const Button = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 3vh;
-  background-color: ${({ theme, $isFormValid }) =>
-    $isFormValid ? theme.colors.brown : theme.colors.gray};
+  background-color: ${({ theme }) => theme.colors.brown};
 `;
 
 const JoinButton = styled.p`

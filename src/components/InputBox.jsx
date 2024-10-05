@@ -1,58 +1,26 @@
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
 
-const InputBox = ({
-  inputText,
-  explainText,
-  validate,
-  isPassword,
-  onValidChange,
-}) => {
-  const [value, setValue] = useState("");
-  const [isValid, setIsValid] = useState(false);
-
-  useEffect(() => {
-    onValidChange(isValid);
-  }, [isValid, onValidChange]);
-
-  const handleChange = (e) => {
-    const inputValue = e.target.value;
-    setValue(inputValue);
-
-    if (inputValue) {
-      setIsValid(validate(inputValue));
-    } else {
-      setIsValid(false);
-    }
-  };
-
-  const getColor = () => {
-    if (!value) return "gray";
-    return isValid ? "green" : "red";
-  };
-
+const InputBox = ({ inputText, isPassword, value, onChange }) => {
   return (
     <InputBoxContainer>
-      <InnerContainer borderColor={getColor()}>
+      <InnerContainer>
         <InputText
           type={isPassword ? "password" : "text"}
           value={value}
           placeholder={value ? "" : inputText}
-          onChange={handleChange}
+          onChange={onChange}
         />
       </InnerContainer>
-      <ExplainText textColor={getColor()}>{explainText}</ExplainText>
     </InputBoxContainer>
   );
 };
 
 InputBox.propTypes = {
   inputText: PropTypes.string.isRequired,
-  explainText: PropTypes.string.isRequired,
-  validate: PropTypes.func.isRequired,
   isPassword: PropTypes.bool,
-  onValidChange: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 const InputBoxContainer = styled.div`
@@ -68,26 +36,19 @@ const InnerContainer = styled.div`
   height: 7vh;
   min-height: 50px;
   border-radius: 1.08vw;
-  border: 2px solid ${({ theme, borderColor }) => theme.colors[borderColor]};
+  border: 2px solid ${({ theme, color }) => theme.colors[color]};
   padding: 5.18%;
   justify-content: space-between;
   align-items: center;
+  margin: 10px 0;
 `;
 
 const InputText = styled.input`
   ${({ theme }) => theme.fonts.subText};
+  width: 100%;
   border: none;
   outline: none;
-  opacity: 45%;
-`;
-
-const ExplainText = styled.p`
-  ${({ theme }) => theme.fonts.helperText};
-  margin: 10px 0;
-  margin-left: 5px;
-  opacity: 45%;
-  margin-bottom: 3%;
-  color: #929292;
+  opacity: 60%;
 `;
 
 export default InputBox;
