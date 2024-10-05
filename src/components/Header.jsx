@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import searchIcon from "../image/search.svg";
@@ -24,6 +25,26 @@ const Header = () => {
     nav('/chatbot');
   };
 
+  const handleSearch = async (query) => {
+    try {
+      // API 요청
+      const response = await axios.get(`${import.meta.env.VITE_BE_ENDPOINT}/api/book`, {
+        params: { title: query } // 제목으로 책을 검색
+      });
+
+      const books = response.data; // 검색된 책 목록
+      if (books.length > 0) {
+        // 첫 번째 책의 ID를 사용하여 상세 페이지로 이동
+        nav(`/detail/${books[0].id}`);
+      } else {
+        alert("책을 찾을 수 없습니다."); // 검색 결과가 없을 때
+      }
+    } catch (error) {
+      console.error("검색 오류:", error);
+      alert("검색 중 오류가 발생했습니다.");
+    }
+  };
+
   return (
     <HeaderContainer>
       <LeftContainer>
@@ -31,25 +52,25 @@ const Header = () => {
           <img src={garlic} alt="로고" />
         </LogoContainer>
         <SearchContainer>
-                <SearchInput
-                    type="text"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="검색할 책의 제목을 입력해주세요."
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter') {
-                        // 검색 로직을 추가하거나 원하는 동작을 여기에 정의하세요
-                        console.log(`검색어: ${searchQuery}`);
-                      }
-                    }}              />
-                    <IconButton>
-                      <img src={searchIcon} alt="검색" />
-                  </IconButton>
+          <SearchInput
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="검색할 책의 제목을 입력해주세요."
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                handleSearch(searchQuery); // Enter 키 입력 시 검색
+              }
+            }}
+          />
+          <IconButton onClick={() => handleSearch(searchQuery)}>
+            <img src={searchIcon} alt="검색" />
+          </IconButton>
         </SearchContainer>
       </LeftContainer>
       <RightContainer>
         <StyledButton onClick={handleHomeClick}>Home</StyledButton>
-        <StyledButton onClick={handleChatBotClick}>갈릭 봇</StyledButton>
+        <StyledButton onClick={handleChatBotClick}>갈릭봇</StyledButton>
         <StyledButton onClick={handleMyBookClick}>나만의 책장</StyledButton>
         <LoginButton onClick={handleLoginClick}>로그인</LoginButton>
       </RightContainer>

@@ -66,7 +66,7 @@ const ContentBox = styled.div`
 const TextContainer = styled.div`
   display: flex;
   margin: 20px;
-  ${({theme})=>theme.fonts.subText};
+  ${({theme})=>theme.fonts.subBoldText};
   text-align: start;
 `
 const Separator = styled.div`

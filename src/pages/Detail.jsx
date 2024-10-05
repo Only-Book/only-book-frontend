@@ -1,31 +1,59 @@
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Review from "../components/Review";
 
 const Detail = () => {
+  const { id } = useParams(); // URL에서 id 가져오기
+  console.log(id);
+  const [book, setBook] = useState(null); // 상태 초기화
+  const [loading, setLoading] = useState(true); // 로딩 상태 초기화
+  const [error, setError] = useState(null); // 에러 상태 초기화
+
+  // API 호출
+  useEffect(() => {
+    if (id) {
+      const fetchBookDetails = async () => {
+        try {
+          const response = await axios.get(`https://onlybook.shop:8443/api/book/${id}`);
+          setBook(response.data);
+        } catch (error) {
+          setError("책 정보를 가져오는 데 실패했습니다.");
+        } finally {
+          setLoading(false);
+        }
+      };
+  
+      fetchBookDetails();
+    } else {
+      setError("유효하지 않은 책 ID입니다."); // 유효하지 않은 id일 경우 에러 처리
+      setLoading(false);
+    }
+  }, [id]);
+
   return (
     <DetailContainer>
-      <BookContainer>
-        <BookImageContainer>
-          <img alt="임시 책 표지" />
-        </BookImageContainer>
-        <BookDetailContainer>
-          <BookInfoContainer>
-            <BookName>정의란 무엇인가</BookName>
-            <AuthorName>마이클 샌델</AuthorName>
-            <DetailStory>
-              동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세
-              <br />
-              무궁화 삼천리 화려강산 대한사람 대한으로 길이 보전하세
-              <br />
-              남산 위에 저 소나무 철갑을 두른 듯 바람서리 불변함은 우리 기상일세
-            </DetailStory>
-          </BookInfoContainer>
-          <BookRecommend>
-            <RecommendNum>30</RecommendNum>
-            <RecommendTitle>추천 수</RecommendTitle>
-          </BookRecommend>
-        </BookDetailContainer>
-      </BookContainer>
+        {book ? (
+        <BookContainer>
+          <BookImageContainer>
+            <img src={book.coverImage} alt="책 표지" />
+          </BookImageContainer>
+          <BookDetailContainer>
+            <BookInfoContainer>
+              <BookName>{book.title}</BookName>
+              <AuthorName>{book.author}</AuthorName>
+              <DetailStory>{book.description}</DetailStory>
+            </BookInfoContainer>
+            <BookRecommend>
+              <RecommendNum>{book.recommendations}</RecommendNum>
+              <RecommendTitle>추천 수</RecommendTitle>
+            </BookRecommend>
+          </BookDetailContainer>
+        </BookContainer>
+      ) : (
+        <p>책 정보를 찾을 수 없습니다.</p>
+      )}
       <ReviewContainer>
         <Review />
         <Review />
@@ -81,6 +109,7 @@ const AuthorName = styled.p`
 const DetailStory = styled.p`
   ${({ theme }) => theme.fonts.helperText};
   color: ${({ theme }) => theme.colors.black};
+  width: 550px;
   opacity: 45%;
   line-height: 140%;
   margin: 1vw 0;

@@ -34,7 +34,7 @@ const InputBox = ({
 
   return (
     <InputBoxContainer>
-      <InnerContainer color={getColor()}>
+      <InnerContainer borderColor={getColor()}>
         <InputText
           type={isPassword ? "password" : "text"}
           value={value}
@@ -42,7 +42,7 @@ const InputBox = ({
           onChange={handleChange}
         />
       </InnerContainer>
-      <ExplainText>{explainText}</ExplainText>
+      <ExplainText textColor={getColor()}>{explainText}</ExplainText>
     </InputBoxContainer>
   );
 };
@@ -68,7 +68,7 @@ const InnerContainer = styled.div`
   height: 7vh;
   min-height: 50px;
   border-radius: 1.08vw;
-  border: 2px solid ${({ theme, color }) => theme.colors[color]};
+  border: 2px solid ${({ theme, borderColor }) => theme.colors[borderColor]};
   padding: 5.18%;
   justify-content: space-between;
   align-items: center;
@@ -76,16 +76,16 @@ const InnerContainer = styled.div`
 
 const InputText = styled.input`
   ${({ theme }) => theme.fonts.subText};
-  width: 100%;
   border: none;
   outline: none;
-  opacity: 60%;
+  opacity: 45%;
 `;
 
 const ExplainText = styled.p`
   ${({ theme }) => theme.fonts.helperText};
   margin: 10px 0;
   margin-left: 5px;
+  opacity: 45%;
   margin-bottom: 3%;
   color: #929292;
 `;

@@ -23,7 +23,7 @@ export const Theme = {
     helperText: css`
       font-family: "Noto Sans KR", sans-serif;
       font-weight: 500;
-      font-size: 18px;
+      font-size: 16px;
     `,
     button: css`
       font-family: "Noto Sans KR", sans-serif;
@@ -38,7 +38,7 @@ export const Theme = {
     subText: css`
       font-family: "Noto Sans KR", sans-serif;
       font-weight: 500;
-      font-size: 25px;
+      font-size: 20px;
     `,
     subBoldText: css`
       font-family: "Noto Sans KR", sans-serif;
@@ -51,7 +51,7 @@ export const Theme = {
     brown: "#61523F",
     white: "#FFFFFF",
     black: "#000000",
-    gray: "#F5F5F5",
+    gray: "#CDCDCD",
     beige: "#FEF9F3",
     red: "#D72F2F",
     green: "#2BCD3B",

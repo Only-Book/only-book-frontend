@@ -7,7 +7,8 @@ import MyBook from "./pages/MyBook";
 import OnlyBook from "./pages/OnlyBook";
 import Search from "./pages/Search";
 import Genre from "./pages/Genre";
-import ChatBot from "./pages/ChatBot";
+import Detail from "./pages/Detail";
+import ChatBot from "./pages/Chatbot";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/mybook" element={<MyBook />} />
         <Route path="/genre" element={<Genre />} />
         <Route path="/chatbot" element={<ChatBot />} />
+        <Route path="/detail/:id" element={<Detail />} />
       </Routes>
     </BrowserRouter>
   );
