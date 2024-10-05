@@ -38,7 +38,7 @@ export const Theme = {
     subText: css`
       font-family: "Noto Sans KR", sans-serif;
       font-weight: 500;
-      font-size: 20px;
+      font-size: 25px;
     `,
     subBoldText: css`
       font-family: "Noto Sans KR", sans-serif;
@@ -52,7 +52,7 @@ export const Theme = {
     white: "#FFFFFF",
     black: "#000000",
     gray: "#F5F5F5",
-    beige: "#DECDB6",
+    beige: "#FEF9F3",
     red: "#D72F2F",
     green: "#2BCD3B",
   },

@@ -76,13 +76,12 @@ const ImgContainer = styled.div`
 
 const TitleContainer = styled.div`
   margin: 50px;
-  font-size: 45px;
-  font-weight: bold;
+${({theme})=>theme.fonts.button};
 `
 
 const TextContainer = styled.div`
   margin: 20px;
-  font-size: 25px;
+  ${({theme})=>theme.fonts.subText};
 `
 
 export default ShortBook;
