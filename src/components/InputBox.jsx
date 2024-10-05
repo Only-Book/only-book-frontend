@@ -78,14 +78,13 @@ const InputText = styled.input`
   ${({ theme }) => theme.fonts.subText};
   border: none;
   outline: none;
-  opacity: 45%;
+  opacity: 60%;
 `;
 
 const ExplainText = styled.p`
   ${({ theme }) => theme.fonts.helperText};
   margin: 10px 0;
   margin-left: 5px;
-  opacity: 45%;
   margin-bottom: 3%;
   color: #929292;
 `;

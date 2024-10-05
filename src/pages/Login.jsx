@@ -70,6 +70,7 @@ const LoginBox = styled.div`
 
 const Title = styled.p`
   ${({ theme }) => theme.fonts.mainTitle};
+  color: ${({ theme }) => theme.colors.brown};
   margin: 0 7vh 7vh;
 `;
 
