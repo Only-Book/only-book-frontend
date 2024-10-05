@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import ShortBook from "../components/ShortBook";
 
 const OnlyBook = () => {
   return (
@@ -9,6 +10,7 @@ const OnlyBook = () => {
       <SubText>심심한 주말, 책과 함께 하고 싶다면?</SubText>
       <AskButton>갈릭봇에게 질문하기</AskButton>
     </TextContainer>
+    <ShortBook />
   </OnlyBookContainer>
   );
 };
@@ -18,6 +20,7 @@ const OnlyBookContainer = styled.div`
   align-items: center;
   padding: 30px;
   display: flex;
+  flex-direction: column;
   height: 400px;
 `;
 

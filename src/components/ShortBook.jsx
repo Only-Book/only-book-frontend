@@ -51,13 +51,13 @@ const ShortBookContainer = styled.div`
   flex-direction: column;
   width: 100%;
   color: ${({ theme }) => theme.colors.brown};
-  margin: 0px;
+  margin-top: 20px;
 `;
 
 const BookContainer = styled.div`
   display: flex;
   justify-content: space-around;
-  margin-top: 30px;
+  margin-top: 0px;
 `;
 
 const BookItem = styled.div`

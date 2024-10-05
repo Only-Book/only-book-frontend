@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import searchIcon from "../image/search.svg";
+import garlic from "../image/garlic.svg";
 import styled from "styled-components";
 
 const Header = () => {
@@ -21,40 +22,67 @@ const Header = () => {
 
   return (
     <HeaderContainer>
-      로고
-      <SearchContainer>
-              <SearchInput
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="검색할 책의 제목을 입력해주세요."
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                      // 검색 로직을 추가하거나 원하는 동작을 여기에 정의하세요
-                      console.log(`검색어: ${searchQuery}`);
-                    }
-                  }}              />
-                  <IconButton>
-                    <img src={searchIcon} alt="검색" />
-                </IconButton>
-      </SearchContainer>
-      <StyledButton onClick={handleHomeClick}>Home</StyledButton>
-      <StyledButton>갈릭 봇</StyledButton>
-      <StyledButton onClick={handleMyBookClick}>나만의 책장</StyledButton>
-      <LoginButton onClick={handleLoginClick}>로그인</LoginButton>
+      <LeftContainer>
+        <LogoContainer>
+          <img src={garlic} alt="로고" />
+        </LogoContainer>
+        <SearchContainer>
+                <SearchInput
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="검색할 책의 제목을 입력해주세요."
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        // 검색 로직을 추가하거나 원하는 동작을 여기에 정의하세요
+                        console.log(`검색어: ${searchQuery}`);
+                      }
+                    }}              />
+                    <IconButton>
+                      <img src={searchIcon} alt="검색" />
+                  </IconButton>
+        </SearchContainer>
+      </LeftContainer>
+      <RightContainer>
+        <StyledButton onClick={handleHomeClick}>Home</StyledButton>
+        <StyledButton>갈릭 봇</StyledButton>
+        <StyledButton onClick={handleMyBookClick}>나만의 책장</StyledButton>
+        <LoginButton onClick={handleLoginClick}>로그인</LoginButton>
+      </RightContainer>
     </HeaderContainer>
   );
 };
 
 const HeaderContainer = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   background: ${({theme})=>theme.colors.brown};
   height: 75px;
 `;
 
+const LeftContainer = styled.div`
+display: flex;
+align-items: center;
+`
+
+const RightContainer = styled.div`
+display: flex;
+`
+
+const LogoContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 0px 30px;
+  img {
+    width: 55px; /* 이미지의 너비 설정 */
+    height: auto; /* 이미지 비율에 맞게 높이 자동 설정 */
+  }
+`;
+
 const SearchContainer = styled.div`
   display: flex;
+  align-content: center;
+  height: 60px;
   width: 300px;
   background: ${({theme})=>theme.colors.white};
   border-radius: 10px;
@@ -93,7 +121,7 @@ const StyledButton = styled.button`
   border: none;
   padding: 10px;
   cursor: pointer;
-  margin: 0px;
+  margin: 0px 20px;
   font-size: 18px;
   font-weight: bold;
 `;
@@ -108,7 +136,7 @@ const LoginButton = styled.button`
   border-radius: 5px;
   padding: 10px 20px;
   cursor: pointer;
-  margin: 10px;
+  margin: 10px 20px;
   font-size: 18px;
   font-weight: bold;
 `;

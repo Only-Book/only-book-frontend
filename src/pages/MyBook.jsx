@@ -1,7 +1,12 @@
 import styled from "styled-components";
+import LongBook from "../components/LongBook";
 
 const MyBook = () => {
-  return <MyBookContainer />;
+  return (
+  <MyBookContainer>
+    <LongBook />
+  </MyBookContainer>
+  );
 };
 
 const MyBookContainer = styled.div`

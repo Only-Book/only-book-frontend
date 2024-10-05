@@ -108,7 +108,7 @@ const Button = styled.div`
 const JoinButton = styled.p`
   ${({ theme }) => theme.fonts.subText};
   color: #8e8e8e;
-  margin-top: 10px;
+  margin: 30px 20px;
   cursor: pointer;
 
   &:hover {
