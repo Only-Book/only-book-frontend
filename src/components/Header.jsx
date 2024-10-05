@@ -15,6 +15,10 @@ const Header = () => {
     nav('/');
   };
 
+  const handleMyBookClick = () => {
+    nav('/mybook');
+  };
+
   return (
     <HeaderContainer>
       로고
@@ -36,7 +40,7 @@ const Header = () => {
       </SearchContainer>
       <StyledButton onClick={handleHomeClick}>Home</StyledButton>
       <StyledButton>갈릭 봇</StyledButton>
-      <StyledButton>나만의 책장</StyledButton>
+      <StyledButton onClick={handleMyBookClick}>나만의 책장</StyledButton>
       <LoginButton onClick={handleLoginClick}>로그인</LoginButton>
     </HeaderContainer>
   );
