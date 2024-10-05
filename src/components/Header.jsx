@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import searchIcon from "../image/search.svg";
 import styled from "styled-components";
 
 const Header = () => {
@@ -8,6 +9,10 @@ const Header = () => {
 
   const handleLoginClick = () => {
     nav('/login');
+  };
+
+  const handleHomeClick = () => {
+    nav('/');
   };
 
   return (
@@ -25,8 +30,11 @@ const Header = () => {
                       console.log(`검색어: ${searchQuery}`);
                     }
                   }}              />
+                  <IconButton>
+                    <img src={searchIcon} alt="검색" />
+                </IconButton>
       </SearchContainer>
-      <StyledButton>Home</StyledButton>
+      <StyledButton onClick={handleHomeClick}>Home</StyledButton>
       <StyledButton>갈릭 봇</StyledButton>
       <StyledButton>나만의 책장</StyledButton>
       <LoginButton onClick={handleLoginClick}>로그인</LoginButton>
@@ -43,14 +51,34 @@ const HeaderContainer = styled.div`
 
 const SearchContainer = styled.div`
   display: flex;
-  width: 400px;
+  width: 300px;
+  background: ${({theme})=>theme.colors.white};
+  border-radius: 10px;
+  border: 5px solid ${({ theme }) => theme.colors.brown};
+  margin: 3px 0px;
 `
 const SearchInput = styled.input`
   flex: 1; /* 부모 컨테이너의 남은 공간을 차지하도록 설정 */
-  padding: 5px; /* 여백 설정 */
-  border: 5px solid ${({ theme }) => theme.colors.brown};
-  border-radius: 10px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  text-align: start; /* 플레이스홀더 글씨를 중앙에 위치 */
+  ::placeholder {
+    text-align: center; /* 플레이스홀더 텍스트 중앙 정렬 */
+  }
+  margin: 10px;
+`;
 
+const IconButton = styled.button`
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 5px; /* 아이콘 주변 여백 설정 */
+  margin: 2px 5px;
+  img {
+    width: 20px; /* 아이콘 크기 조정 */
+    height: 20px; /* 아이콘 크기 조정 */
+  }
 `;
 
 const StyledButton = styled.button`
