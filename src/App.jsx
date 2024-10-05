@@ -7,7 +7,6 @@ import MyBook from "./pages/MyBook";
 import OnlyBook from "./pages/OnlyBook";
 import Search from "./pages/Search";
 import Genre from "./pages/Genre";
-import ShortBook from "./components/ShortBook";
 
 function App() {
   return (
