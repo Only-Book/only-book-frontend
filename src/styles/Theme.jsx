@@ -51,7 +51,7 @@ export const Theme = {
     brown: "#61523F",
     white: "#FFFFFF",
     black: "#000000",
-    gray: "#CDCDCD",
+    gray: "#F5F5F5",
     beige: "#DECDB6",
     red: "#D72F2F",
     green: "#2BCD3B",
