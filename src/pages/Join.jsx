@@ -1,29 +1,30 @@
 import styled from "styled-components";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import InputBox from "../components/InputBox";
-import { Axios } from "../api/Axios";
 
 const Join = () => {
-  const nav = useNavigate();
-  const [id, setId] = useState("");
-  const [password, setPassword] = useState("");
-  const [nickname, setNickname] = useState("");
+  const [isIdValid, setIsIdValid] = useState(false);
+  const [isPwValid, setIsPwValid] = useState(false);
+  const [isNameValid, setIsNameValid] = useState(false);
 
-  const handleJoin = async () => {
-    try {
-      const response = await Axios.post(`/auth/signin`, {
-        id,
-        password,
-        nickname,
-      });
-      console.log("가입 성공:", response.data);
-      nav("/genre"); // 가입 후 장르 선택 페이지로 이동
-    } catch (error) {
-      console.error("가입 실패:", error);
-      alert("가입 중 오류가 발생했습니다."); // 오류 처리
-    }
+  const validateId = (input) => {
+    const idRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z0-9]{5,10}$/;
+    return idRegex.test(input);
   };
+
+  const validPassword = (input) => {
+    const passwordRegex =
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,14}$/;
+    return passwordRegex.test(input);
+  };
+
+  const validName = (input) => {
+    const nameRegex = /^[A-Za-z0-9]{2,10}$/;
+    return nameRegex.test(input);
+  };
+
+  const isFormValid = isIdValid && isPwValid && isNameValid;
 
   return (
     <JoinContainer>
@@ -31,21 +32,30 @@ const Join = () => {
       <WholeContainer>
         <InputBox
           inputText="아이디"
-          value={id}
-          onChange={(e) => setId(e.target.value)}
+          explainText="영문과 숫자를 조합하여 5~10글자 미만으로 입력하여 주세요."
+          validate={validateId}
+          onValidChange={setIsIdValid}
         />
         <InputBox
           inputText="비밀번호"
+          explainText="영문과 숫자, 특수기호를 조합하여 8~14글자 미만으로 입력하여 주세요."
+          validate={validPassword}
           isPassword={true}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onValidChange={setIsPwValid}
         />
         <InputBox
           inputText="닉네임"
-          value={nickname}
-          onChange={(e) => setNickname(e.target.value)}
+          explainText="닉네임을 입력하세요."
+          validate={validName}
+          onValidChange={setIsNameValid}
         />
-        <Button onClick={handleJoin}>다음</Button> {/* 가입 버튼 */}
+        {isFormValid ? (
+          <Link to="/genre">
+            <Button $isFormValid={isFormValid}>다음</Button>
+          </Link>
+        ) : (
+          <Button disabled={!isFormValid}>다음</Button>
+        )}
       </WholeContainer>
     </JoinContainer>
   );
@@ -59,7 +69,7 @@ const JoinContainer = styled.div`
   align-items: center;
 `;
 
-const Title = styled.div`
+const Title = styled.p`
   ${({ theme }) => theme.fonts.mainTitle};
   color: ${({ theme }) => theme.colors.brown};
   margin: 0 7vh 7vh;
