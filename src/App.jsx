@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import MyBook from "./pages/MyBook";
 import OnlyBook from "./pages/OnlyBook";
 import Search from "./pages/Search";
+import Genre from "./pages/Genre";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/join" element={<Join />} />
         <Route path="/search" element={<Search />} />
         <Route path="/mybook" element={<MyBook />} />
+        <Route path="/genre" element={<Genre />} />
       </Routes>
     </BrowserRouter>
   );

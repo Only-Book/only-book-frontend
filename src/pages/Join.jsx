@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import InputBox from "../components/InputBox";
 
 const Join = () => {
@@ -48,7 +49,13 @@ const Join = () => {
           validate={validName}
           onValidChange={setIsNameValid}
         />
-        <Button $isFormValid={isFormValid}>다음</Button>
+        {isFormValid ? (
+          <Link to="/genre">
+            <Button $isFormValid={isFormValid}>다음</Button>
+          </Link>
+        ) : (
+          <Button disabled={!isFormValid}>다음</Button>
+        )}
       </WholeContainer>
     </JoinContainer>
   );
@@ -80,14 +87,15 @@ const Button = styled.div`
   display: flex;
   width: 9vw;
   min-width: 100px;
-  height: 5.73vh;
+  height: 6.5vh;
   min-height: 50px;
   border-radius: 1.08vw;
   justify-content: center;
   align-items: center;
   margin-top: 3vh;
-  background-color: ${({ theme, isFormValid }) =>
-    isFormValid ? theme.colors.brown : theme.colors.gray};
+  background-color: ${({ theme, $isFormValid }) =>
+    $isFormValid ? theme.colors.brown : theme.colors.gray};
+  cursor: ${({ $isFormValid }) => ($isFormValid ? "pointer" : "not-allowed")};
 `;
 
 export default Join;
