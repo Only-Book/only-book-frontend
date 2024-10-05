@@ -76,6 +76,7 @@ const InnerContainer = styled.div`
 
 const InputText = styled.input`
   ${({ theme }) => theme.fonts.subText};
+  width: 100%;
   border: none;
   outline: none;
   opacity: 60%;

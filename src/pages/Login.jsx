@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import InputBox from "../components/InputBox";
 
 const Login = () => {
@@ -39,7 +40,9 @@ const Login = () => {
           />
           <ButtonContainer>
             <Button isFormValid={isFormValid}>로그인</Button>
-            <JoinButton>회원가입</JoinButton>
+            <Link to="/join">
+              <JoinButton>회원가입</JoinButton>
+            </Link>
           </ButtonContainer>
         </LoginBox>
       </WholeContainer>
