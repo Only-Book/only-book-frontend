@@ -12,7 +12,7 @@ const Header = () => {
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="검색할 책의 제목을 입력해주세요."
+                  placeholder="검색할 책의 제목을 입력해주세요"
                   onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
               />
       </SearchContainer>
