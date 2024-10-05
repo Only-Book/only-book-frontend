@@ -1,36 +1,46 @@
-import axios from 'axios';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import searchIcon from "../image/search.svg";
 import garlic from "../image/garlic.svg";
 import styled from "styled-components";
+import { Axios } from "../api/Axios";
 
 const Header = () => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const nav = useNavigate();
 
+  useEffect(() => {
+    const loggedIn = localStorage.getItem("isLoggedIn") === "true";
+    setIsLoggedIn(loggedIn);
+  }, []);
+
   const handleLoginClick = () => {
-    nav('/login');
+    nav("/login");
   };
 
   const handleHomeClick = () => {
-    nav('/');
+    nav("/");
   };
 
   const handleMyBookClick = () => {
-    nav('/mybook');
+    nav("/mybook");
   };
 
   const handleChatBotClick = () => {
-    nav('/chatbot');
+    nav("/chatbot");
   };
 
   const handleSearch = async (query) => {
     try {
       // API 요청
-      const response = await axios.get(`${import.meta.env.VITE_BE_ENDPOINT}/api/book`, {
-        params: { title: query } // 제목으로 책을 검색
-      });
+      const response = await axios.get(
+        `${import.meta.env.VITE_BE_ENDPOINT}/api/book`,
+        {
+          params: { title: query }, // 제목으로 책을 검색
+        }
+      );
 
       const books = response.data; // 검색된 책 목록
       if (books.length > 0) {
@@ -42,6 +52,17 @@ const Header = () => {
     } catch (error) {
       console.error("검색 오류:", error);
       alert("검색 중 오류가 발생했습니다.");
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await Axios.post("/auth/logout"); // 로그아웃 요청
+      localStorage.removeItem("isLoggedIn"); // 로그아웃 후 로그인 상태 제거
+      setIsLoggedIn(false); // 상태 업데이트
+      nav("/"); // 홈으로 이동
+    } catch (error) {
+      console.error("로그아웃 실패:", error);
     }
   };
 
@@ -58,7 +79,7 @@ const Header = () => {
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="검색할 책의 제목을 입력해주세요."
             onKeyDown={(e) => {
-              if (e.key === 'Enter') {
+              if (e.key === "Enter") {
                 handleSearch(searchQuery); // Enter 키 입력 시 검색
               }
             }}
@@ -72,7 +93,11 @@ const Header = () => {
         <StyledButton onClick={handleHomeClick}>Home</StyledButton>
         <StyledButton onClick={handleChatBotClick}>갈릭봇</StyledButton>
         <StyledButton onClick={handleMyBookClick}>나만의 책장</StyledButton>
-        <LoginButton onClick={handleLoginClick}>로그인</LoginButton>
+        {isLoggedIn ? (
+          <LoginButton onClick={handleLogout}>로그아웃</LoginButton> // 로그아웃 버튼
+        ) : (
+          <LoginButton onClick={handleLoginClick}>로그인</LoginButton> // 로그인 버튼
+        )}
       </RightContainer>
     </HeaderContainer>
   );
@@ -81,18 +106,18 @@ const Header = () => {
 const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  background: ${({theme})=>theme.colors.brown};
+  background: ${({ theme }) => theme.colors.brown};
   height: 75px;
 `;
 
 const LeftContainer = styled.div`
-display: flex;
-align-items: center;
-`
+  display: flex;
+  align-items: center;
+`;
 
 const RightContainer = styled.div`
-display: flex;
-`
+  display: flex;
+`;
 
 const LogoContainer = styled.div`
   display: flex;
@@ -109,11 +134,11 @@ const SearchContainer = styled.div`
   align-content: center;
   height: 60px;
   width: 300px;
-  background: ${({theme})=>theme.colors.white};
+  background: ${({ theme }) => theme.colors.white};
   border-radius: 10px;
   border: 5px solid ${({ theme }) => theme.colors.brown};
   margin: 3px 0px;
-`
+`;
 const SearchInput = styled.input`
   flex: 1; /* 부모 컨테이너의 남은 공간을 차지하도록 설정 */
   border: none;
@@ -157,7 +182,7 @@ const LoginButton = styled.button`
   align-items: center;
   background: ${({ theme }) => theme.colors.white};
   color: ${({ theme }) => theme.colors.brown};
-  border: 1px solid #61523F;
+  border: 1px solid #61523f;
   border-radius: 5px;
   padding: 10px 20px;
   cursor: pointer;
