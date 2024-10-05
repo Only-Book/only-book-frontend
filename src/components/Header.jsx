@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styled from "styled-components";
 
 const Header = () => {
@@ -13,7 +13,7 @@ const Header = () => {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="검색할 책의 제목을 입력해주세요."
-                  onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+                  onKeyDown={(e) => e.key === 'Enter'}
               />
       </SearchContainer>
       <StyledButton>Home</StyledButton>
@@ -55,7 +55,7 @@ const LoginButton = styled.button`
   background: ${({ theme }) => theme.colors.white};
   color: ${({ theme }) => theme.colors.brown};
   border: 1px soild #61523F;
-  border-radius: 5px
+  border-radius: 5px;
   padding: 10px;
   cursor: pointer;
   margin: 10px;
