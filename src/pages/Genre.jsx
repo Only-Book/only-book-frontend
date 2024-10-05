@@ -110,7 +110,7 @@ const GenreSelect = styled.div`
   border-radius: 1vw;
   margin: 2vw;
   background-color: ${({ theme, $isSelected }) =>
-    $isSelected ? theme.colors.beige : theme.colors.gra};
+    $isSelected ? theme.colors.beige : theme.colors.gray};
   cursor: pointer;
 `;
 
