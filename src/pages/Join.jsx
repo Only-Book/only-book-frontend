@@ -48,7 +48,7 @@ const Join = () => {
           validate={validName}
           onValidChange={setIsNameValid}
         />
-        <Button isFormValid={isFormValid}>다음</Button>
+        <Button $isFormValid={isFormValid}>다음</Button>
       </WholeContainer>
     </JoinContainer>
   );
